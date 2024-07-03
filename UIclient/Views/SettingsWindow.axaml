@@ -1,0 +1,51 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="using:UIclient2.ViewModels"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="UIclient2.SettingsWindow"
+        x:DataType="vm:SettingsWindowViewModel"
+        Title="Linux Defender"
+        Icon="/Assets/avalonia-logo.ico"
+        Background="#323232"
+        Width="1000"
+        Height="600">
+
+    <Design.DataContext>
+        <!-- 1C214F This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:SettingsWindowViewModel/>
+    </Design.DataContext>
+
+    <Canvas>
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Top="100">
+            <MenuItem Header="_Home" Foreground="White" FontSize="20" Command="{Binding HomeCommand}"/>
+            <MenuItem Header="_Archives" Foreground="White" FontSize="20" Command="{Binding ArchivesCommand}"/>
+            <MenuItem Header="_Settings" Foreground="White" FontSize="20"/>
+        </StackPanel>
+
+       <Border Canvas.Left="250" Canvas.Top="90" Background="#969696" Width="660" Height="50" CornerRadius="10">
+            <TextBlock Text="Settings" FontSize="24" Margin="10" Foreground="White" HorizontalAlignment="Center"/>
+        </Border>
+
+        <TextBox x:Name="FrequencyTextBox" Watermark="Current frequnecy: " Background="#969696" Height="40" FontSize="20" Foreground="Black" 
+         Canvas.Top="200" Canvas.Left="250" Width="400" Margin="0,0,20,0"/>
+
+        <TextBlock Text="Invalid input" Foreground="Red" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10" IsVisible="false" 
+        Canvas.Top="250" Canvas.Left="250" x:Name="invalidTextBlock"/>
+
+        <Button Content="Submit" Background="#969696" Foreground="White" FontSize="20" Width="100" Height="40" 
+                Canvas.Top="200" Canvas.Left="700" CornerRadius="10" Click="Submit_Click">
+            <Button.Styles>
+                <Style>
+                    <Style.Resources>
+                        <SolidColorBrush x:Key="ButtonBackground" Color="#EE1154"/>
+                        <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="#6E6E6E"/>
+                        <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="#FF4D7A"/>
+                    </Style.Resources>
+                </Style>
+            </Button.Styles>
+        </Button>
+    </Canvas>
+</Window>

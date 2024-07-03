@@ -1,0 +1,73 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:vm="using:UIclient2.ViewModels"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="UIclient2.ResultsScanWindow"
+		Icon="/Assets/popup.ico"
+        Title="Linux Defender"
+        Background="#323232"
+        Width="1200"
+        Height="800"
+		x:DataType="vm:ResultsWindowViewModel">
+
+	<Design.DataContext>
+		<!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+		<vm:CustomScanWindowViewModel/>
+	</Design.DataContext>
+	
+	<Canvas>
+		<Border Canvas.Left="20" Canvas.Top="30" Background="#969696" Width="200" Height="50" CornerRadius="10">
+			<TextBlock Text="Scan Results:" FontSize="24" Margin="10" Foreground="White" HorizontalAlignment="Center"/>
+		</Border>
+  		<Border Canvas.Top="100" Canvas.Left="20" CornerRadius="10" Background="Gray" Padding="5" Width="1160" Height="650">
+            <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <StackPanel Orientation="Horizontal">
+                    <!-- First ListBox with ScrollViewer -->
+                    <ListBox Name="filesResults" Background="#969696" Foreground="Black" 
+                             ItemsSource="{Binding FilesResults}" 
+                             IsHitTestVisible="False"
+                             Width="500" Margin="5">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Border CornerRadius="10" Background="Gray" Padding="5" Margin="5">
+                                    <TextBlock Text="{Binding}" FontWeight="Bold" Foreground="Black" FontSize="20"/>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+                    <!-- Second ListBox with ScrollViewer -->
+                    <ListBox Name="tablesResults" Background="#969696" Foreground="Black"  
+                             ItemsSource="{Binding TablesResults}" 
+                             IsHitTestVisible="False"
+                             Width="300" Margin="5">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Border CornerRadius="10" Background="Gray" Padding="5" Margin="5">
+                                    <TextBlock Text="{Binding}" FontWeight="Bold" Foreground="Black" FontSize="20"/>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+                    <!-- Third ListBox with ScrollViewer -->
+                    <ListBox Name="networkResults" Background="#969696" Foreground="Black" 
+                             ItemsSource="{Binding NetworkResults}" 
+                             IsHitTestVisible="False"
+                             Width="300" Margin="5">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Border CornerRadius="10" Background="Gray" Padding="5" Margin="5">
+                                    <TextBlock Text="{Binding}" FontWeight="Bold" Foreground="Black" FontSize="20"/>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
+	</Canvas>
+</Window>

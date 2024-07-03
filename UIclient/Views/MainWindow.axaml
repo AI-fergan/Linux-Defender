@@ -1,0 +1,84 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:UIclient2.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="UIclient2.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="Linux Defender"
+        Background="#323232"
+        Width="1000"
+        Height="600"
+		WindowStartupLocation="CenterScreen">
+
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+	<Canvas>
+
+		<StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Top="100">
+			<MenuItem Header="_Home" Foreground="White" FontSize="20"/>
+			<MenuItem Header="_Archives" Foreground="White" FontSize="20" Command="{Binding ArchivesCommand}"/>
+			<MenuItem Header="_Settings" Foreground="White" FontSize="20" Command="{Binding SettingsCommand}"/>
+		</StackPanel>
+
+		<!-- Headline stretching from the beginning of the buttons to the end -->
+		<Border Canvas.Left="250" Canvas.Top="90" Background="#969696" Width="660" Height="50" CornerRadius="10">
+			<TextBlock Text="Linux Defender" FontSize="24" Margin="10" Foreground="White" HorizontalAlignment="Center"/>
+		</Border>
+
+		<!-- Buttons in a row -->
+		<Button Canvas.Left="250" Canvas.Top="200" Width="200" Height="200" Click="QuickScan_Click" CornerRadius="10">
+			<Button.Styles>
+				<Style>
+					<Style.Resources>
+						<SolidColorBrush x:Key="ButtonBackground" Color="#969696"/>
+						<SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="#6E6E6E"/>
+						<SolidColorBrush x:Key="ButtonBackgroundPressed" Color="#1E1E1E"/>
+					</Style.Resources>
+				</Style>
+			</Button.Styles>
+			<StackPanel VerticalAlignment="Bottom">
+				<TextBlock Text="Quick Scan" Foreground="White" FontSize="20" HorizontalAlignment="Center"/>
+			</StackPanel>
+		</Button>
+
+		<!-- Full Scan Button -->
+		<Button Canvas.Left="480" Canvas.Top="200" Width="200" Height="200" Click="FullScan_Click" CornerRadius="10">
+			<Button.Styles>
+				<Style>
+					<Style.Resources>
+						<SolidColorBrush x:Key="ButtonBackground" Color="#969696"/>
+						<SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="#6E6E6E"/>
+						<SolidColorBrush x:Key="ButtonBackgroundPressed" Color="#1E1E1E"/>
+					</Style.Resources>
+				</Style>
+			</Button.Styles>
+			<StackPanel VerticalAlignment="Bottom">
+				<TextBlock Text="Full Scan" Foreground="White" FontSize="20" HorizontalAlignment="Center"/>
+			</StackPanel>
+		</Button>
+
+		<!-- Custom Scan Button -->
+		<Button Canvas.Left="710" Canvas.Top="200" Width="200" Height="200" Command="{Binding CustomScanCommand}" CornerRadius="10">
+			<Button.Styles>
+				<Style>
+					<Style.Resources>
+						<SolidColorBrush x:Key="ButtonBackground" Color="#969696"/>
+						<SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="#6E6E6E"/>
+						<SolidColorBrush x:Key="ButtonBackgroundPressed" Color="#1E1E1E"/>
+					</Style.Resources>
+				</Style>
+			</Button.Styles>
+			<StackPanel VerticalAlignment="Bottom">
+				<TextBlock Text="Custom Scan" Foreground="White" FontSize="20" HorizontalAlignment="Center"/>
+			</StackPanel>
+		</Button>
+	</Canvas>
+
+</Window> 

@@ -1,0 +1,70 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:UIclient2.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="UIclient2.Views.CustomScanWindow"
+        x:DataType="vm:CustomScanWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="Linux Defender"
+        Background="#323232"
+        Width="1000"
+        Height="600">
+
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:CustomScanWindowViewModel/>
+    </Design.DataContext>
+
+
+    <Canvas>
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Top="100">
+            <MenuItem Header="_Home" Foreground="White" FontSize="20"  Command="{Binding HomeCommand}"/>
+            <MenuItem Header="_Archives" Foreground="White" FontSize="20" Command="{Binding ArchivesCommand}"/>
+            <MenuItem Header="_Settings" Foreground="White" FontSize="20" Command="{Binding SettingsCommand}"/>
+        </StackPanel>    
+
+        <Border Canvas.Left="250" Canvas.Top="90" Background="#969696" Width="660" Height="50" CornerRadius="10">
+            <TextBlock Text="Custom Scan" FontSize="24" Margin="10" Foreground="White" HorizontalAlignment="Center"/>
+        </Border>
+
+        <TextBox x:Name="ScanTextBox" Watermark="Insert IP or URL..." Background="#969696" Height="40" FontSize="20" Foreground="Black" 
+         Canvas.Top="200" Canvas.Left="250" Width="400" Margin="0,0,20,0"/>
+
+        <TextBlock Text="Invalid input" Foreground="Gray" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10" IsVisible="false" 
+        Canvas.Top="250" Canvas.Left="250" x:Name="ResultsTextBlock" FontWeight="Bold"/>
+
+        <Button Content="Submit" Background="#969696" Foreground="White" FontSize="20" Width="100" Height="40" 
+                Canvas.Top="200" Canvas.Left="700" CornerRadius="10" Click="Submit_Click">
+            <Button.Styles>
+                <Style>
+                    <Style.Resources>
+                        <SolidColorBrush x:Key="ButtonBackground" Color="#969696"/>
+                        <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="#6E6E6E"/>
+                        <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="#1E1E1E"/>
+                    </Style.Resources>
+                </Style>
+            </Button.Styles>
+        </Button>
+        
+        <Button Content="SCAN FILE/S" Background="#969696" Foreground="White" FontSize="20" Width="200" Height="40" CornerRadius="10" 
+                Command="{Binding ScanCommand}" Canvas.Left="700" Canvas.Top="250">
+            <Button.Styles>
+                <Style>
+                    <Style.Resources>
+                        <SolidColorBrush x:Key="ButtonBackground" Color="#969696"/>
+                        <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="#6E6E6E"/>
+                        <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="#1E1E1E"/>
+                    </Style.Resources>
+                </Style>
+            </Button.Styles>
+            <StackPanel VerticalAlignment="Center">
+                <TextBlock Text="SCAN FILE/S" Foreground="White" FontSize="20" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Button>
+
+    </Canvas>
+
+</Window>

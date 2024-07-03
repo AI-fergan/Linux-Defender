@@ -1,0 +1,113 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="using:UIclient2.ViewModels"
+        xmlns:controls="clr-namespace:Avalonia.Controls;assembly=Avalonia.Controls.DataGrid"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="UIclient2.Views.ArchivesWindow"
+        x:DataType="vm:ArchivesWindowViewModel"
+		Icon="/Assets/avalonia-logo.ico"
+        Title="Linux Defender"
+        Background="#323232"
+        Width="1000"
+        Height="600">
+	<Design.DataContext>
+		<vm:ArchivesWindowViewModel/>
+	</Design.DataContext>
+
+	<Canvas>
+		<StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Top="100">
+			<MenuItem Header="_Home" Foreground="White" FontSize="20" Command="{Binding HomeCommand}"/>
+			<MenuItem Header="_Archives" Foreground="White" FontSize="20"/>
+			<MenuItem Header="_Settings" Foreground="White" FontSize="20" Command="{Binding SettingsCommand}"/>
+		</StackPanel>
+		
+		<Border Canvas.Left="250" Canvas.Top="90" Background="#969696" Width="660" Height="50" CornerRadius="10">
+            <TextBlock Text="Archives" FontSize="24" Margin="10" Foreground="White" HorizontalAlignment="Center"/>
+        </Border>
+
+		<Button Canvas.Left="250" Canvas.Top="200" Width="150" Height="30" Command="{Binding VirusScanCommand}" Foreground="White" FontSize="18" Content="Viruses">
+			<Button.Styles>
+				<Style>
+					<Style.Resources>
+						<SolidColorBrush x:Key="ButtonBackground" Color="#969696"/>
+						<SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="#6E6E6E"/>
+						<SolidColorBrush x:Key="ButtonBackgroundPressed" Color="#1E1E1E"/>
+					</Style.Resources>
+				</Style>
+			</Button.Styles>
+		</Button>
+
+		<Button Canvas.Left="600" Canvas.Top="200" Width="150" Height="30" Command="{Binding BlockedCommand}" Foreground="White" FontSize="18" Content="Blocked">
+			<Button.Styles>
+				<Style>
+					<Style.Resources>
+						<SolidColorBrush x:Key="ButtonBackground" Color="#969696"/>
+						<SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="#6E6E6E"/>
+						<SolidColorBrush x:Key="ButtonBackgroundPressed" Color="#1E1E1E"/>
+					</Style.Resources>
+				</Style>
+			</Button.Styles>
+		</Button>
+
+		<controls:DataGrid x:Name="DataTable1"
+                           ItemsSource="{Binding DataForTable1}"
+                           Background="#969696"
+                           Foreground="White"
+                           AutoGenerateColumns="False"
+                           IsVisible="{Binding IsTable1Visible}"
+                           Canvas.Left="250"
+                           Canvas.Top="230"
+						   Width="250">
+			<controls:DataGrid.Columns>
+				<controls:DataGridTextColumn Binding="{Binding}"/>
+			</controls:DataGrid.Columns>
+		</controls:DataGrid>
+
+		<controls:DataGrid x:Name="DataTable2"
+							ItemsSource="{Binding DataForTable2}"
+							Background="#969696"
+							Foreground="White"
+							AutoGenerateColumns="False"
+							IsVisible="{Binding IsTable2Visible}"
+							Canvas.Left="600"
+							Canvas.Top="230"
+							Width="220">
+			<controls:DataGrid.Columns>
+				<controls:DataGridTextColumn Binding="{Binding}"/>
+			</controls:DataGrid.Columns>
+		</controls:DataGrid>
+		
+	    <TextBox x:Name="proc_pid" Watermark="Insert process PID" Background="#969696" Height="40" FontSize="20" Foreground="Black" 
+        	Canvas.Top="400" Canvas.Left="250" Width="400" Margin="0,0,20,0"/>
+		<Button Content="Block" Background="#969696" Foreground="White" FontSize="20" Width="70" Height="40" 
+                Canvas.Top="400" Canvas.Left="680" CornerRadius="10" Click="block">
+            <Button.Styles>
+                <Style>
+                    <Style.Resources>
+                        <SolidColorBrush x:Key="ButtonBackground" Color="#969696"/>
+                        <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="#6E6E6E"/>
+                        <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="#1E1E1E"/>
+                    </Style.Resources>
+                </Style>
+            </Button.Styles>
+        </Button>
+
+		<Button Content="Free" Background="#969696" Foreground="White" FontSize="20" Width="70" Height="40" 
+                Canvas.Top="400" Canvas.Left="780" CornerRadius="10" Click="free">
+            <Button.Styles>
+                <Style>
+                    <Style.Resources>
+                        <SolidColorBrush x:Key="ButtonBackground" Color="#969696"/>
+                        <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="#6E6E6E"/>
+                        <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="#1E1E1E"/>
+                    </Style.Resources>
+                </Style>
+            </Button.Styles>
+        </Button>
+
+		<TextBlock Text="Invalid PID" Foreground="Gray" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10" IsVisible="false" 
+        Canvas.Top="450" Canvas.Left="250" x:Name="ResultsTextBlock" FontWeight="Bold"/>
+	</Canvas>
+</Window>

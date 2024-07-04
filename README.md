@@ -53,5 +53,79 @@ This scan contains both the quick scan and another more folders and it go over a
 <img src="screenshots/System-Arch.png" alt="Architecture" width="750"/>
 
 # Sytem protocol
+In this project there are several components that need to communicate with each other, therefore there is a protocol of the system that describes how the communication between the various components should be carried out.
 ## global message structure
 <img src="screenshots/Proto.png" alt="Protocol" width="500"/>
+
+## Messages in Json format
+### Backend -> Server
+```
+112 - Ask for IP scan
+{"IP":"(IP address)"}
+
+113 - Ask for HASH scan
+{"HASH":"(HASH code)"}
+
+114 - Ask for saving IP
+{"IP": "(IP address", "type" : "0-clear, 1-malcious"}
+
+115 - Ask for saving malicious HASH
+{"HASH":"(HASH code)", "type" : "0-clear, 1-malcious"}
+```
+
+### Server -> Backend
+```
+212 - Reply if the IP is malicious or clear
+{"IP status":"malicious \ clear"}
+
+213 - Reply if the HASH is malicious or clear
+{"HASH status":"malicious \ clear"}
+
+214 - Reply if the IP saving was successful
+{"status":"1 (success) \ 0 (fail)"}
+
+215 - Reply if the HASH saving was successful
+{"status":"1 (success) \ 0 (fail)"}
+```
+
+### Client -> Backend
+```
+100 - Ask for Start scanning
+{"type":"scan type (1, 2, 3 ...)", "path": "(path for scan)"}
+
+101 - Ask for suspicious process list
+{"status":"1"}
+
+102 - Ask for suspends process list
+{"status":"1"}
+
+103 - Ask for free process from block
+{"ID":"Procees ID that reference to the Process PID"}
+
+104 - Ask for block process
+{"ID":"Procees ID that reference to the Process PID"}
+```
+
+### Backend -> Client
+```
+200 - Send scan results
+{"status": 1, "sctResults":"(hook entry in sct table / -1)",
+"idtResults": "(hook entry in idt table / -1)",
+"packetsResults": "(list of malicious processes networking with IPs)",
+"openPortsResults": "(list of open ports)",
+"spoofingResults": "(list of IPs that spoof specific ports)",
+"yaraResults": "(Details about processes by yara rules)",
+"hashesResults": "(malicious hashes that found)"}
+
+201 - Send suspicious process list
+{"process names":"proc_1, proc_2, proc_3 ..."}
+
+202 - Send suspends process list
+{"process names":"proc_1, proc_2, proc_3 ..."}
+
+203 - Free process from block successfully
+{"status":"1 (success) \ 0 (fail)"}
+
+204 - block process successfully
+{"status":"1 (success) \ 0 (fail)"}
+```

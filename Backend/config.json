@@ -1,0 +1,16 @@
+{
+    "version": "1.0.0",
+
+    "quick": ["/home/noam/Documents", 
+              "/home/noam/Downloads", 
+              "/home/noam/Videos",
+              "/home/noam/Desktop/pwnable.kr/aeg",
+              "/home/noam/Desktop/pwnable.kr/md5_calculator",
+              "/home/noam/Desktop/rootkit"],
+
+    "full": ["/home/noam/Desktop", 
+             "/tmp", 
+             "/home"],
+
+    "yara-rules": "/home/noam/Desktop/implementations/Backend/yara-scan/rules"
+}

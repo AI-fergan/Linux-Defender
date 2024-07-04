@@ -47,3 +47,11 @@ then it scan the open ports, malicious network and spofing scan.
 
 ### full scan
 This scan contains both the quick scan and another more folders and it go over all the files in that folders and the sub files at the sub folders for full scanning of system.
+
+
+# Architecture
+<img src="screenshots/System-Arch.png" alt="Architecture" width="750"/>
+
+# Sytem protocol
+## global message structure
+<img src="screenshots/Proto.png" alt="Protocol" width="500"/>
